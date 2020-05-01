@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
         if (isAlive)
         {
             PlayerMovement();
+
+
             PlayerCrouch();
             PlayerRun();
         }
@@ -56,7 +58,6 @@ public class Player : MonoBehaviour
             isRunning = false;
             movementSpeed = walkSpeed;
         }
-        ////todo uniezaleznic bieg od kucania
 
     }
 
@@ -64,28 +65,31 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            isCrouching = true;
+            if (isCrouching)
+            {
+                isCrouching = false;
+            }
+            else
+            {
+                isCrouching = true;
+            }
 
             if (isCrouching)
             {
-                isRunning = false;
                 Vector3 crouchPos = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
                 transform.position = crouchPos;
                 movementSpeed = crouchSpeed;
-
             }
             else
             {
                 Vector3 nonCrouchPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
                 transform.position = nonCrouchPos;
                 movementSpeed = walkSpeed;
-
+                
             }
         }
-        else
-        {
-            isCrouching = false;
-        }
+        
+
     }
 
     private void PlayerMovement()
