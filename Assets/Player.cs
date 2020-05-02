@@ -110,21 +110,12 @@ public class Player : MonoBehaviour
     private void PlayerMovement()
     {
         //todo poprawić na bardziej naturalny ruch
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(moveHorizontal, moveVertical, transform.position.z);
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += Vector3.forward * movementSpeed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += Vector3.back * movementSpeed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            transform.position += Vector3.left * movementSpeed * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += Vector3.right * movementSpeed * Time.deltaTime;
+            myRigidbody.AddForce(movement/2);
         }
     }
 }
