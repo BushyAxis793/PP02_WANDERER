@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     float walkSpeed = 10f;
     float crouchSpeed = 5f;
     float runSpeed = 15f;
+    float jumpSpeed = 5f;
 
 
     Rigidbody myRigidbody;
@@ -16,6 +17,8 @@ public class Player : MonoBehaviour
     bool isCrouching = false;
     bool isRunning = false;
     bool isAlive = true;
+    bool isGrounded = true;
+
 
     void Start()
     {
@@ -29,10 +32,9 @@ public class Player : MonoBehaviour
         if (isAlive)
         {
             PlayerMovement();
-
-
             PlayerCrouch();
             PlayerRun();
+            PlayerJump();
         }
         else
         {
@@ -46,17 +48,31 @@ public class Player : MonoBehaviour
         throw new NotImplementedException();
     }
 
+    private void PlayerJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            if (!isCrouching)
+            {
+                myRigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+            }
+        }
+    }
+
     private void PlayerRun()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+        if (!isCrouching)
         {
-            isRunning = true;
-            movementSpeed = runSpeed;
-        }
-        else
-        {
-            isRunning = false;
-            movementSpeed = walkSpeed;
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
+            {
+                isRunning = true;
+                movementSpeed = runSpeed;
+            }
+            else
+            {
+                isRunning = false;
+                movementSpeed = walkSpeed;
+            }
         }
 
     }
@@ -76,25 +92,24 @@ public class Player : MonoBehaviour
 
             if (isCrouching)
             {
-                Vector3 crouchPos = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
-                transform.position = crouchPos;
+                Vector3 crouchPos = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+                Camera.main.transform.position = crouchPos;
                 movementSpeed = crouchSpeed;
             }
             else
             {
-                Vector3 nonCrouchPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
-                transform.position = nonCrouchPos;
+                Vector3 nonCrouchPos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
+                Camera.main.transform.position = nonCrouchPos;
                 movementSpeed = walkSpeed;
-                
             }
         }
-        
+
 
     }
 
     private void PlayerMovement()
     {
-
+        //todo poprawić na bardziej naturalny ruch
         if (Input.GetKey(KeyCode.W))
         {
             transform.position += Vector3.forward * movementSpeed * Time.deltaTime;
