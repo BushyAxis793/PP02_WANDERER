@@ -63,8 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
-    <Compile Include="Assets\JMO Assets\WarFX\Editor\CFX_SpawnSystemEditor.cs" />
+    <Compile Include="Assets\Asset Packs\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
+    <Compile Include="Assets\Asset Packs\JMO Assets\WarFX\Editor\CFX_SpawnSystemEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Users/Mikołaj/Desktop/Repositories/PP02_WANDERER/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
