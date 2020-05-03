@@ -10,17 +10,19 @@ public class Player : MonoBehaviour
     float crouchSpeed = 2f;
     float runSpeed = 10f;
     float jumpSpeed = 5f;
-    float inputY;
-    float inputX;
+
 
     Rigidbody myRigidbody;
     CharacterController charController;
+    Camera cam;
     Quaternion baseRotation;
 
     bool isCrouching = false;
     bool isRunning = false;
     bool isAlive = true;
     bool isGrounded = true;
+
+    Vector3 moveDirection = Vector3.zero;
 
 
     void Start()
@@ -29,7 +31,6 @@ public class Player : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         charController = GetComponent<CharacterController>();
         movementSpeed = 10f;
-        transform.rotation = baseRotation;
     }
 
 
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
     {
         if (isAlive)
         {
+
             PlayerMovement();
             PlayerCrouch();
             PlayerRun();
@@ -57,11 +59,13 @@ public class Player : MonoBehaviour
 
     private void PlayerJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!isCrouching)
             {
-                myRigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                //myRigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                moveDirection.y = jumpSpeed * Time.deltaTime;
+                //todo naprawic skok
             }
         }
     }
@@ -116,12 +120,15 @@ public class Player : MonoBehaviour
 
     private void PlayerMovement()
     {
-        float inputX = Input.GetAxis("Horizontal");
-        float inputZ = Input.GetAxis("Vertical");
+        float zAxis = Input.GetAxis("Vertical");
+        float xMouse = Input.GetAxis("Mouse X");
 
-        Vector3 moveVector = transform.right * inputX + transform.forward * inputZ;
-        charController.Move(moveVector * movementSpeed * Time.deltaTime);
-        //todo poprawic poruszanie się
+        moveDirection = new Vector3(0, 0, zAxis);
+        moveDirection = transform.TransformDirection(moveDirection * movementSpeed);
+
+        charController.Move(moveDirection  * Time.deltaTime);
+
+        transform.Rotate(0, xMouse, 0);
 
     }
 
