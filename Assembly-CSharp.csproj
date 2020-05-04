@@ -79,13 +79,13 @@
     <Compile Include="Assets\Asset Packs\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
     <Compile Include="Assets\Asset Packs\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\Asset Packs\Nokobot\ModernGuns_Handgun\Demo Assets\SimpleShoot.cs" />
-    <Compile Include="Assets\EnemyHealth.cs" />
-    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Granade.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Weapon.cs" />
+    <Compile Include="Assets\Scripts\Weapon.cs" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Additive_softrim.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft Scroll.shader" />

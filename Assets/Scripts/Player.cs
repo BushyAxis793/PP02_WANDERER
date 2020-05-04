@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     float crouchSpeed = 2f;
     float runSpeed = 10f;
     float jumpSpeed = 5f;
+    float gravityForce = 20f;
 
 
     Rigidbody myRigidbody;
@@ -21,9 +22,18 @@ public class Player : MonoBehaviour
     bool isRunning = false;
     bool isAlive = true;
     bool isGrounded = true;
+    bool isMoving;
 
-    Vector3 moveDirection = Vector3.zero;
+    private Vector3 movingDirection = Vector3.zero;
 
+    private float inputX, inputY;
+    private float inputSetX, inputSetY;
+    private float inputModFactor;
+
+    private bool limitDiagonalSpeed = true;
+    private float antiBumpFactor = 0.75f;
+
+    [SerializeField] GameObject weaponCam;
 
     void Start()
     {
@@ -31,6 +41,8 @@ public class Player : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         charController = GetComponent<CharacterController>();
         movementSpeed = 10f;
+        isMoving = false;
+
     }
 
 
@@ -42,7 +54,6 @@ public class Player : MonoBehaviour
             PlayerMovement();
             PlayerCrouch();
             PlayerRun();
-            PlayerJump();
         }
         else
         {
@@ -61,11 +72,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+
             if (!isCrouching)
             {
-                //myRigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-                moveDirection.y = jumpSpeed * Time.deltaTime;
-                //todo naprawic skok
+                movingDirection.y = jumpSpeed;
+
             }
         }
     }
@@ -101,35 +112,83 @@ public class Player : MonoBehaviour
                 isCrouching = true;
             }
 
-            if (isCrouching)
-            {
-                Vector3 crouchPos = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
-                Camera.main.transform.position = crouchPos;
-                movementSpeed = crouchSpeed;
-            }
-            else
-            {
-                Vector3 nonCrouchPos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
-                Camera.main.transform.position = nonCrouchPos;
-                movementSpeed = walkSpeed;
-            }
+            CrouchPosition();
         }
 
 
     }
 
+    private void CrouchPosition()
+    {
+        if (isCrouching)
+        {
+            Vector3 crouchPos = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+            weaponCam.transform.position = crouchPos;
+            movementSpeed = crouchSpeed;
+        }
+        else
+        {
+            Vector3 nonCrouchPos = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
+            weaponCam.transform.position = nonCrouchPos;
+            movementSpeed = walkSpeed;
+        }
+    }
+
     private void PlayerMovement()
     {
-        float zAxis = Input.GetAxis("Vertical");
-        float xMouse = Input.GetAxis("Mouse X");
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                inputSetY = 1f;
+            }
+            else
+            {
+                inputSetY = -1f;
+            }
 
-        moveDirection = new Vector3(0, 0, zAxis);
-        moveDirection = transform.TransformDirection(moveDirection * movementSpeed);
+        }
+        else
+        {
+            inputSetY = 0f;
+        }
 
-        charController.Move(moveDirection  * Time.deltaTime);
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                inputSetX = -1f;
+            }
+            else
+            {
+                inputSetX = 1f;
+            }
 
-        transform.Rotate(0, xMouse, 0);
 
+        }
+        else
+        {
+            inputSetX = 0f;
+        }
+
+        inputY = Mathf.Lerp(inputY, inputSetY, Time.deltaTime * 12f);
+        inputX = Mathf.Lerp(inputX, inputSetX, Time.deltaTime * 12f);
+
+
+        if (isGrounded)
+        {
+            movingDirection = new Vector3(inputX, -antiBumpFactor,
+                inputY);
+            movingDirection = transform.TransformDirection(movingDirection) * movementSpeed;
+
+            PlayerJump();
+
+        }
+        movingDirection.y -= gravityForce * Time.deltaTime;
+
+        isGrounded = (charController.Move(movingDirection * Time.deltaTime) & CollisionFlags.Below) != 0;
+
+        isMoving = charController.velocity.magnitude > 0.15f;
     }
 
 

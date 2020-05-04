@@ -15,7 +15,16 @@ public class CameraMovement : MonoBehaviour
 
     private Quaternion baseRotation;
 
-    
+    private float sensivityX = 1.5f;
+    private float sensivityY = 1.5f;
+
+    private float sensivityXSet = 1.5f;
+    private float sensivityYSet = 1.5f;
+
+    private float mouseSensivity = 1.5f;
+
+    public enum axesRotation { mouseX, mouseY }
+    public axesRotation axes = axesRotation.mouseY;
 
     void Start()
     {
@@ -42,27 +51,29 @@ public class CameraMovement : MonoBehaviour
 
     void RotationHandle()
     {
-        Quaternion xRotation = CalcAxisX();
-        Quaternion yRotation = CalcAxisY();
-        transform.rotation = baseRotation * xRotation * yRotation;
+        if (sensivityX != mouseSensivity || sensivityY != mouseSensivity)
+        {
+            sensivityX = sensivityY = mouseSensivity;
+        }
 
-    }
+        sensivityXSet = sensivityX;
+        sensivityYSet = sensivityY;
 
-    private Quaternion CalcAxisY()
-    {
-        float sensivityY = 1.5f;
-        rotationY += Input.GetAxis("Mouse Y") * sensivityY;
-        rotationY = ClampAngle(rotationY, minY, maxY);
-        Quaternion yRotation = Quaternion.AngleAxis(rotationY, Vector3.left);
-        return yRotation;
-    }
+        if (axes == axesRotation.mouseX)
+        {
+            rotationX += Input.GetAxis("Mouse X") * sensivityX;
 
-    public Quaternion CalcAxisX()
-    {
-        float sensivityX = 1.5f;
-        rotationX += Input.GetAxis("Mouse X") * sensivityX;
-        rotationX = ClampAngle(rotationX, minX, maxX);
-        Quaternion xRotation = Quaternion.AngleAxis(rotationX, Vector3.up);
-        return xRotation;
+            rotationX = ClampAngle(rotationX, minX, maxX);
+            Quaternion xRotation = Quaternion.AngleAxis(rotationX, Vector3.up);
+            transform.localRotation = baseRotation * xRotation;
+        }
+        if (axes == axesRotation.mouseY)
+        {
+            rotationY += Input.GetAxis("Mouse Y") * sensivityY;
+
+            rotationY = ClampAngle(rotationY, minY, maxY);
+            Quaternion yRotation = Quaternion.AngleAxis(rotationY, Vector3.left);
+            transform.localRotation = baseRotation * yRotation;
+        }
     }
 }
