@@ -34,7 +34,7 @@ public class Granade : MonoBehaviour
     {
         if (enemy.CompareTag("Enemy"))
         {
-            enemy.TakeDamage();
+            enemy.TakeDamageFromGranade();
         }
     }
 

@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        throw new NotImplementedException();
+        //todo ekran game over
     }
 
     private void PlayerJump()

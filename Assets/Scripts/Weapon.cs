@@ -8,12 +8,17 @@ public class Weapon : MonoBehaviour
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] float shootDistance = 100f;
     [SerializeField] GameObject impactEffect;
-    [SerializeField] float damage = 20f;
+    [SerializeField] int damage = 10;
 
 
 
     bool isShootEnabled = true;
+    [SerializeField] float timeBetweenShots = .2f;
 
+    private void Start()
+    {
+        
+    }
     private void OnEnable()
     {
         isShootEnabled = true;
@@ -32,7 +37,7 @@ public class Weapon : MonoBehaviour
     {
         muzzleFlash.Play();
         WeaponRaycast();
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(timeBetweenShots);
         muzzleFlash.Stop();
         print("moge strzelac");
 
@@ -46,10 +51,10 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, shootDistance))
         {
             Debug.Log(hit.transform.name);
-            EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
+            Enemy target = hit.transform.GetComponent<Enemy>();
             if (target != null)
             {
-                target.TakeDamage(damage);
+                target.TakeDamageFromWeapon(damage);
             }
             GameObject impactVFX = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactVFX, 2f);

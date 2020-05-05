@@ -12,24 +12,48 @@ public class Enemy : MonoBehaviour
 
     Granade granade;
 
+    Animator anim;
+
     private void Start()
     {
+        anim = GetComponent<Animator>();
         granade = FindObjectOfType<Granade>();
     }
 
-    public void TakeDamage()
+    public void TakeDamageFromGranade()
     {
         if (isAlive)
         {
             float distanceToGranade = Vector3.Distance(transform.position, granadePosition.position);
             if (distanceToGranade < granade.explosionRadius)
             {
+                anim.SetTrigger("GetHit");
                 health -= 10;
+                if (health<=0)
+                {
+                    anim.SetTrigger("Dead");
+                    Destroy(gameObject, 10f);
+                }
 
             }
         }
     }
+    public void TakeDamageFromWeapon(int damage)
+    {
+        anim.SetTrigger("GetHit");
+        health -= damage;
+        if (health <= 0)
+        {
+            anim.SetTrigger("Dead");
+            Destroy(gameObject,10f);
+        }
+    }
 
+    public void GiveDamage(int damage)
+    {
+        anim.SetBool("Attack",true);
+
+    }
 
 
 }
