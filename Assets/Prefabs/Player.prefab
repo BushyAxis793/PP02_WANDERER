@@ -189,10 +189,10 @@ GameObject:
   - component: {fileID: 3036620430155976681}
   - component: {fileID: 5918899499768374549}
   - component: {fileID: 7440748863041322030}
-  - component: {fileID: 914332485029752321}
+  - component: {fileID: 8100875117863648119}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,7 +256,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850701e8b45903d448b9f35da112c8e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: 100
   weaponCam: {fileID: 2170348094559598138}
+  healthText: {fileID: 0}
 --- !u!114 &7440748863041322030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axes: 0
---- !u!114 &914332485029752321
+--- !u!114 &8100875117863648119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,9 +281,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5918899499768374550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc45538e439088f4d8239e1d9aa3f72a, type: 3}
+  m_Script: {fileID: 11500000, guid: 24d5c18f707628d43adb8a7f43daa9e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoSlots:
+  - ammoType: 0
+    ammoAmount: 30
+  - ammoType: 1
+    ammoAmount: 60
+  - ammoType: 2
+    ammoAmount: 10
 --- !u!114 &7444065899110192292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,8 +306,11 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1806391937236311668}
   shootDistance: 100
   impactEffect: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
-  damage: 20
-  timeBetweenShots: 0
+  damage: 30
+  ammoType: 2
+  ammoSlot: {fileID: 8100875117863648119}
+  ammoText: {fileID: 0}
+  timeBetweenShots: 1
 --- !u!1001 &2441465121339126355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -488,6 +500,21 @@ PrefabInstance:
       propertyPath: impactEffect
       value: 
       objectReference: {fileID: 100002, guid: 99c73c92ac40473459640b165473206f, type: 3}
+    - target: {fileID: 7117392796734072876, guid: a94758f029c513e46ae768a35fd74e2e,
+        type: 3}
+      propertyPath: ammoSlot
+      value: 
+      objectReference: {fileID: 8100875117863648119}
+    - target: {fileID: 7117392796734072876, guid: a94758f029c513e46ae768a35fd74e2e,
+        type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117392796734072876, guid: a94758f029c513e46ae768a35fd74e2e,
+        type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7435316285246990911, guid: a94758f029c513e46ae768a35fd74e2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -524,6 +551,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1670856824}
     m_Modifications:
+    - target: {fileID: 3222254937030717597, guid: 16422897f949bdf4a8ef9d45f1c6bcf4,
+        type: 3}
+      propertyPath: ammoType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222254937030717597, guid: 16422897f949bdf4a8ef9d45f1c6bcf4,
+        type: 3}
+      propertyPath: ammoSlot
+      value: 
+      objectReference: {fileID: 8100875117863648119}
+    - target: {fileID: 3222254937030717597, guid: 16422897f949bdf4a8ef9d45f1c6bcf4,
+        type: 3}
+      propertyPath: damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222254937030717597, guid: 16422897f949bdf4a8ef9d45f1c6bcf4,
+        type: 3}
+      propertyPath: timeBetweenShots
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5124406679760449637, guid: 16422897f949bdf4a8ef9d45f1c6bcf4,
         type: 3}
       propertyPath: m_Name

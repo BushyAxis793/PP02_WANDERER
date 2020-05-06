@@ -1,14 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Enemy Health")]
     [SerializeField] int health = 100;
-    [SerializeField] int damageAmount = 5;
     [SerializeField] Transform granadePosition;
-
     bool isAlive = true;
+
+    [Header("Enemy Attack")]
+    [SerializeField] Transform target;
+    [SerializeField] int damage = 20;
+    public float lookRadius = 10f;
+    bool isChasing;
+    bool isAttacking;
+
+    [Header("Enemy Patrol")]
+    [SerializeField] Transform[] patrolSpots;
+    float speed;
+    int randomSpot;
+    float patrolDistance;
+
+    Player player;
+
+    NavMeshAgent agent;
 
     Granade granade;
 
@@ -16,8 +33,18 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        isChasing = false;
+        randomSpot = Random.Range(0, patrolSpots.Length);
+
         anim = GetComponent<Animator>();
         granade = FindObjectOfType<Granade>();
+        agent = GetComponent<NavMeshAgent>();
+        player = FindObjectOfType<Player>();
+    }
+
+    private void Update()
+    {
+        EnemyPatrol();
     }
 
     public void TakeDamageFromGranade()
@@ -29,9 +56,10 @@ public class Enemy : MonoBehaviour
             {
                 anim.SetTrigger("GetHit");
                 health -= 10;
-                if (health<=0)
+                if (health <= 0)
                 {
                     anim.SetTrigger("Dead");
+                    anim.enabled = false;
                     Destroy(gameObject, 10f);
                 }
 
@@ -45,14 +73,68 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             anim.SetTrigger("Dead");
-            Destroy(gameObject,10f);
+            anim.enabled = false;
+            Destroy(gameObject, 10f);
         }
     }
 
-    public void GiveDamage(int damage)
+    public void GiveDamage()
     {
-        anim.SetBool("Attack",true);
 
+        FindObjectOfType<Player>().TakeDamage(damage);
+
+    }
+
+    private void LookAtTarget()
+    {
+        Vector3 targetDirection = (target.position - transform.position).normalized;
+        Quaternion lookTarget = Quaternion.LookRotation(new Vector3(targetDirection.x, 0, targetDirection.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookTarget, Time.deltaTime * 4f);
+    }
+
+    private void EnemyPatrol()//todo naprawić chasing i atack przeciwnika
+    {
+        isChasing = false;
+
+        if (agent.remainingDistance < .5f)
+        {
+            if (patrolSpots.Length == 0)
+            {
+                return;
+            }
+
+            agent.destination = patrolSpots[randomSpot].position;
+
+            randomSpot = (randomSpot + 1) % patrolSpots.Length;
+        }
+
+        patrolDistance = Vector3.Distance(target.position, transform.position);
+
+        if (patrolDistance <= lookRadius)
+        {
+            isChasing = true;
+
+            agent.SetDestination(target.position);
+
+            LookAtTarget();
+        }
+
+        if (isChasing)
+        {
+            anim.SetBool("Run", true);
+            anim.SetBool("Walk", false);
+        }
+        else
+        {
+            anim.SetBool("Run", false);
+            anim.SetBool("Walk", true);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
 
 

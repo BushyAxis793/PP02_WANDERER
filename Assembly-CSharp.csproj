@@ -63,7 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AmmoPickup.cs" />
     <Compile Include="Assets\Asset Packs\Desert Environment\Example\AutoMoveAndRotate.cs" />
+    <Compile Include="Assets\Asset Packs\Dialog.cs" />
+    <Compile Include="Assets\Asset Packs\Health.cs" />
     <Compile Include="Assets\Asset Packs\JMO Assets\WarFX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
     <Compile Include="Assets\Asset Packs\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\Asset Packs\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
@@ -79,22 +82,33 @@
     <Compile Include="Assets\Asset Packs\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
     <Compile Include="Assets\Asset Packs\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\Asset Packs\Nokobot\ModernGuns_Handgun\Demo Assets\SimpleShoot.cs" />
+    <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\GUI Elements\UI_BrightnessShader\Brightness.cs" />
+    <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\MenuScripts\Init_LoadPreferences.cs" />
+    <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\MenuScripts\MenuController.cs" />
+    <Compile Include="Assets\Scripts\AmmoManager.cs" />
+    <Compile Include="Assets\Scripts\AmmoType.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Slime\EnemyAnimController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Slime\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Granade.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
-    <Compile Include="Assets\WeaponSwitch.cs" />
+    <Compile Include="Assets\Scripts\WeaponSwitch.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Additive_softrim.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft Scroll.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Additive_softrim.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Unlit.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\_Effects\MuzzleFlashes\!MuzzleFlash Differences.txt" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Alpha-Specular TintColor.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Add Scroll.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Unlit_Opacity_softrim.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\_Effects (Mobile)\MuzzleFlashes\!MuzzleFlash Differences.txt" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Particle Add A8.shader" />
@@ -102,22 +116,36 @@
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Smoke Scroll.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Particle Multiply A8.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Additive.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Unlit_Opacity.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S AlphaBlend Scroll.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Additive.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Unlit_softrim.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Unlit_Opacity_softrim.shader" />
     <None Include="Assets\Asset Packs\Desert Environment\Models\Shaders\WindShader.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Unlit_softrim.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Unlit_Opacity.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Additive_Opacity.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Particle AddSoft A8.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\!WarFX Readme.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Alpha-Diffuse TintColor.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Additive_Opacity_softrim.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Unlit.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S AlphaBlend NoSoftParticles.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Additive_Opacity.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Mikołaj/Desktop/Repositories/PP02_WANDERER/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

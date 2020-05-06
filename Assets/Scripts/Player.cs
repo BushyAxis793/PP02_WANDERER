@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,28 +13,30 @@ public class Player : MonoBehaviour
     float jumpSpeed = 5f;
     float gravityForce = 20f;
 
+    float inputX, inputY;
+    float inputSetX, inputSetY;
+    float inputModFactor;
+    float antiBumpFactor = 0.75f;
+
 
     Rigidbody myRigidbody;
     CharacterController charController;
     Camera cam;
     Quaternion baseRotation;
+    Vector3 movingDirection = Vector3.zero;
 
     bool isCrouching = false;
     bool isRunning = false;
     bool isAlive = true;
     bool isGrounded = true;
     bool isMoving;
-
-    private Vector3 movingDirection = Vector3.zero;
-
-    private float inputX, inputY;
-    private float inputSetX, inputSetY;
-    private float inputModFactor;
-
-    private bool limitDiagonalSpeed = true;
-    private float antiBumpFactor = 0.75f;
+    bool limitDiagonalSpeed = true;
+    
+    [Range(0,100)]
+    public int playerHealth = 100;
 
     [SerializeField] GameObject weaponCam;
+    [SerializeField] TextMeshProUGUI healthText;
 
     void Start()
     {
@@ -48,6 +51,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        healthText.text = "+" + playerHealth.ToString();
+
         if (isAlive)
         {
 
@@ -191,6 +196,17 @@ public class Player : MonoBehaviour
         isMoving = charController.velocity.magnitude > 0.15f;
     }
 
+    public void TakeDamage(int damage)
+    {
+        //todo wyswietlic czerwony ekran
+        playerHealth -= damage;
+        if (playerHealth<=0)
+        {
+            print("i'm dead");
+            //wyłączyć sterowanie
+            //todo game over screen
+        }
+    }
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -9,6 +10,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] float shootDistance = 100f;
     [SerializeField] GameObject impactEffect;
     [SerializeField] int damage = 10;
+    [SerializeField] AmmoType ammoType;
+    [SerializeField] AmmoManager ammoSlot;
+    [SerializeField] TextMeshProUGUI ammoText;
 
 
 
@@ -17,7 +21,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
     private void OnEnable()
     {
@@ -26,6 +30,8 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
+        ammoText.text = ammoSlot.GetAmmo(ammoType).ToString();
+
         if (Input.GetButtonDown("Fire1"))
         {
             StartCoroutine(WeaponShoot());
@@ -35,11 +41,16 @@ public class Weapon : MonoBehaviour
 
     IEnumerator WeaponShoot()
     {
-        muzzleFlash.Play();
-        WeaponRaycast();
-        yield return new WaitForSeconds(timeBetweenShots);
-        muzzleFlash.Stop();
-        print("moge strzelac");
+        if (ammoSlot.GetAmmo(ammoType) > 0)
+        {
+
+            muzzleFlash.Play();
+            WeaponRaycast();
+            ammoSlot.ReduceAmmo(ammoType);
+            yield return new WaitForSeconds(timeBetweenShots);
+            muzzleFlash.Stop();
+            print("moge strzelac");
+        }
 
     }
 
