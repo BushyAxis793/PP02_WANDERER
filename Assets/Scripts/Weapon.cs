@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] AmmoType ammoType;
     [SerializeField] AmmoManager ammoSlot;
     [SerializeField] TextMeshProUGUI ammoText;
+    [SerializeField] AudioClip audioClip;
+
 
 
 
@@ -21,7 +23,6 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-
     }
     private void OnEnable()
     {
@@ -30,21 +31,18 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
+
         ammoText.text = ammoSlot.GetAmmo(ammoType).ToString();
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            StartCoroutine(WeaponShoot());
-
-        }
+        ShotHandle();
     }
 
     IEnumerator WeaponShoot()
     {
         if (ammoSlot.GetAmmo(ammoType) > 0)
         {
-
             muzzleFlash.Play();
+            GetComponent<AudioSource>().PlayOneShot(audioClip);
             WeaponRaycast();
             ammoSlot.ReduceAmmo(ammoType);
             yield return new WaitForSeconds(timeBetweenShots);
@@ -74,5 +72,28 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    private void ShotHandle()
+    {
+        if (ammoType == AmmoType.pistolAmmo || ammoType == AmmoType.shotgunAmmo)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                StartCoroutine(WeaponShoot());
+
+            }
+        }
+        if (ammoType == AmmoType.carbineAmmo)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                StartCoroutine(WeaponShoot());
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                return;//todo zrobic ciagły efekt strzelania i dzwiek
+            }
+        }
+
+    }
 
 }
