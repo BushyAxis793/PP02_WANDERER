@@ -65,5 +65,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-
+    private void PauseMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ///todo zatrzymanie czasu
+            /////todo on/off pause menu
+        }
+    }
 }
