@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     bool isPlay;
     float musicVolume = 1f;
-    
+
     void Start()
     {
         isPlay = true;
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        
+
         GetComponent<AudioSource>().volume = musicVolume;
     }
 
@@ -53,6 +54,15 @@ public class GameManager : MonoBehaviour
     public void SetHighGraphics()
     {
         QualitySettings.SetQualityLevel(3);
+    }
+
+    public void LoadGameScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void LoadMainMenuScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
 
