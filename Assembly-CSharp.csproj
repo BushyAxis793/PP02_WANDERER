@@ -87,6 +87,7 @@
     <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\GUI Elements\UI_BrightnessShader\Brightness.cs" />
     <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\MenuScripts\Init_LoadPreferences.cs" />
     <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\MenuScripts\MenuController.cs" />
+    <Compile Include="Assets\EndLevel.cs" />
     <Compile Include="Assets\Scripts\AmmoManager.cs" />
     <Compile Include="Assets\Scripts\AmmoType.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />

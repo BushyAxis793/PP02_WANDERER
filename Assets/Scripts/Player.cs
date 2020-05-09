@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class Player : MonoBehaviour
     float inputModFactor;
     float antiBumpFactor = 0.75f;
 
-
+    Enemy enemy;
     Rigidbody myRigidbody;
     CharacterController charController;
     Camera cam;
@@ -31,8 +32,8 @@ public class Player : MonoBehaviour
     bool isGrounded = true;
     bool isMoving;
     bool limitDiagonalSpeed = true;
-    
-    [Range(0,100)]
+
+    [Range(0, 100)]
     public int playerHealth = 100;
 
     [SerializeField] GameObject weaponCam;
@@ -40,7 +41,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        enemy = FindObjectOfType<Enemy>();
         myRigidbody = GetComponent<Rigidbody>();
         charController = GetComponent<CharacterController>();
         movementSpeed = 10f;
@@ -55,23 +56,13 @@ public class Player : MonoBehaviour
 
         if (isAlive)
         {
-
             PlayerMovement();
             PlayerCrouch();
             PlayerRun();
         }
-        else
-        {
-            Die();
-        }
-        print(movementSpeed);
-
     }
 
-    private void Die()
-    {
-        //todo ekran game over
-    }
+
 
     private void PlayerJump()
     {
@@ -198,13 +189,11 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        //todo wyswietlic czerwony ekran
         playerHealth -= damage;
-        if (playerHealth<=0)
+        if (playerHealth <= 0)
         {
-            print("i'm dead");
-            //wyłączyć sterowanie
-            //todo game over screen
+            SceneManager.LoadScene(3);
+
         }
     }
 

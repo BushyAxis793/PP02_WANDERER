@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9e70eebffce4442a9fe88efc244d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ammoAmount: 5
+  ammoAmount: 30
   ammoType: 0
   infoText: {fileID: 0}
 --- !u!1 &8635914930996387034

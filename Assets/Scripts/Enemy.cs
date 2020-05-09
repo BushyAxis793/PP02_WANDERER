@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform[] patrolSpots;
     float speed;
     int randomSpot;
-    float patrolDistance;
+    float targetDistance;
 
     Player player;
 
@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        isAttacking = false;
         isChasing = false;
         randomSpot = Random.Range(0, patrolSpots.Length);
 
@@ -45,6 +46,8 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         EnemyPatrol();
+        EnemyAttack();
+        Debug.Log(targetDistance);
     }
 
     public void TakeDamageFromGranade()
@@ -80,9 +83,7 @@ public class Enemy : MonoBehaviour
 
     public void GiveDamage()
     {
-
         FindObjectOfType<Player>().TakeDamage(damage);
-
     }
 
     private void LookAtTarget()
@@ -92,7 +93,7 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookTarget, Time.deltaTime * 4f);
     }
 
-    private void EnemyPatrol()//todo naprawić chasing i atack przeciwnika
+    private void EnemyPatrol()
     {
         isChasing = false;
 
@@ -108,9 +109,9 @@ public class Enemy : MonoBehaviour
             randomSpot = (randomSpot + 1) % patrolSpots.Length;
         }
 
-        patrolDistance = Vector3.Distance(target.position, transform.position);
+        targetDistance = Vector3.Distance(target.position, transform.position);
 
-        if (patrolDistance <= lookRadius)
+        if (targetDistance <= lookRadius)
         {
             isChasing = true;
 
@@ -135,6 +136,25 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    private void EnemyAttack()
+    {
+        if (targetDistance <= 3f)
+        {
+            isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;          
+        }
+
+        if (isAttacking)
+        {
+            
+            anim.SetTrigger("Attack");
+            anim.SetBool("Run", false);
+        }
     }
 
 

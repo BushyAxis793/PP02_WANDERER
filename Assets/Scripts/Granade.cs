@@ -8,17 +8,18 @@ public class Granade : MonoBehaviour
     [SerializeField] GameObject explosion;
     public float explosionRadius = 5f;
 
-
+    Rigidbody rigGranade;
     Enemy enemy;
 
     private void Start()
     {
         enemy = FindObjectOfType<Enemy>();
+        rigGranade = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.G))
         {
             ThrowGranade();
         }
@@ -26,6 +27,7 @@ public class Granade : MonoBehaviour
 
     public void ThrowGranade()
     {
+        rigGranade.AddExplosionForce(700f, transform.position, 10f);
         StartCoroutine(ExplosionTimer());
         Destroy(gameObject, 2.1f);
     }
