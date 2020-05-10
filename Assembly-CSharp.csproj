@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AmmoPickup.cs" />
     <Compile Include="Assets\Arena\Example\ImageEffects\Scripts\ScreenSpaceAmbientOcclusion.cs" />
     <Compile Include="Assets\Arena\Example\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
     <Compile Include="Assets\Asset Packs\Desert Environment\Example\AutoMoveAndRotate.cs" />
@@ -87,10 +86,11 @@
     <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\GUI Elements\UI_BrightnessShader\Brightness.cs" />
     <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\MenuScripts\Init_LoadPreferences.cs" />
     <Compile Include="Assets\Asset Packs\SpeedTutor_Full_Menu_System\MenuScripts\MenuController.cs" />
-    <Compile Include="Assets\EndLevel.cs" />
     <Compile Include="Assets\Scripts\AmmoManager.cs" />
+    <Compile Include="Assets\Scripts\AmmoPickup.cs" />
     <Compile Include="Assets\Scripts\AmmoType.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\EndLevel.cs" />
     <Compile Include="Assets\Scripts\Enemies\Slime\EnemyAnimController.cs" />
     <Compile Include="Assets\Scripts\Enemies\Slime\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
@@ -114,6 +114,7 @@
     <None Include="Assets\Asset Packs\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\Dissolve_Alpha_Unlit_Opacity_softrim.shader" />
+    <None Include="Assets\Asset Packs\Assets MOOD WARE\_MW Skybox\Documentation\Documentation City Street Skyboxes Vol. 1.txt" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\_Effects (Mobile)\MuzzleFlashes\!MuzzleFlash Differences.txt" />
     <None Include="Assets\Asset Packs\JMO Assets\WarFX\Shaders\WFX_S Particle Add A8.shader" />
     <None Include="Assets\Asset Packs\Particle Dissolve Shader by Moonflower Carnivore\Shaders\legacy\DissolveSoft_Alpha_Additive_Opacity_softrim.shader" />

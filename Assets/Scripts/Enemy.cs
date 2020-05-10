@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
     {
         EnemyPatrol();
         EnemyAttack();
-        Debug.Log(targetDistance);
+        
     }
 
     public void TakeDamageFromGranade()
@@ -71,7 +71,8 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamageFromWeapon(int damage)
     {
-        anim.SetTrigger("GetHit");
+        Debug.Log("odejmuje zycie");
+        //anim.SetTrigger("GetHit");
         health -= damage;
         if (health <= 0)
         {

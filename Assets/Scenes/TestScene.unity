@@ -2676,6 +2676,11 @@ PrefabInstance:
       propertyPath: ammoText
       value: 
       objectReference: {fileID: 1613652894}
+    - target: {fileID: 8100875117863648119, guid: 6fa4fe7daa714ba42af7ddda59e0bdb9,
+        type: 3}
+      propertyPath: ammoSlots.Array.data[1].ammoAmount
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8908272265299453548, guid: 6fa4fe7daa714ba42af7ddda59e0bdb9,
         type: 3}
       propertyPath: m_audioClip

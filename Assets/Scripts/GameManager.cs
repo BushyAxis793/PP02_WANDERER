@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     {
         isPlay = true;
         DontDestroyOnLoad(this);
-        //Cursor.visible = false;
     }
     private void Update()
     {
@@ -24,10 +23,15 @@ public class GameManager : MonoBehaviour
         GetComponent<AudioSource>().volume = musicVolume;
     }
 
+
     public void MusicHandler(float vol)
     {
-        isPlay = !isPlay;
+        musicVolume = vol;
+    }
 
+    public void MusicOnOff()
+    {
+        isPlay = !isPlay;
         if (isPlay)
         {
 
@@ -37,8 +41,6 @@ public class GameManager : MonoBehaviour
         {
             GetComponent<AudioSource>().Stop();
         }
-
-        musicVolume = vol;
     }
 
     public void ExitGame()
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadMainMenuScene()
     {
-        SceneManager.LoadScene(0);//nie działa z poziomu GameOver
+        SceneManager.LoadScene(0);
     }
 
     private void PauseMenu()
@@ -91,5 +93,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    public void BackToGameClick()
+    {
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        hudCanvas.SetActive(true);
+        pauseMenuCanvas.SetActive(false);
+    }
+
+
 }
