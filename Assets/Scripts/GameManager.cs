@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     bool isActive;
     bool isPlay;
-    float musicVolume = 1f;
+    float musicVolume = .5f;
     [SerializeField] GameObject hudCanvas;
     [SerializeField] GameObject pauseMenuCanvas;
 
@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         isPlay = true;
         DontDestroyOnLoad(this);
+        // Cursor.visible = false;
     }
     private void Update()
     {
@@ -63,10 +64,12 @@ public class GameManager : MonoBehaviour
 
     public void LoadGameScene()
     {
+        Cursor.visible = false;
         SceneManager.LoadScene(1);
     }
     public void LoadMainMenuScene()
     {
+        Cursor.visible = true;
         SceneManager.LoadScene(0);
     }
 

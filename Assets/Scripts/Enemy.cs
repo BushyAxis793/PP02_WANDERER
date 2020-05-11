@@ -45,9 +45,12 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        EnemyPatrol();
-        EnemyAttack();
-        
+        if (isAlive)
+        {
+            EnemyPatrol();
+            EnemyAttack();
+        }
+
     }
 
     public void TakeDamageFromGranade()
@@ -71,14 +74,16 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamageFromWeapon(int damage)
     {
-        Debug.Log("odejmuje zycie");
-        //anim.SetTrigger("GetHit");
-        health -= damage;
-        if (health <= 0)
+        if (isAlive)
         {
-            anim.SetTrigger("Dead");
-            anim.enabled = false;
-            Destroy(gameObject, 10f);
+            anim.SetTrigger("GetHit");
+            health -= damage;
+            if (health <= 0)
+            {
+                anim.SetTrigger("Dead");
+                isAlive = false;
+                Destroy(gameObject, 10f);
+            }
         }
     }
 
@@ -147,12 +152,12 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            isAttacking = false;          
+            isAttacking = false;
         }
 
         if (isAttacking)
         {
-            
+
             anim.SetTrigger("Attack");
             anim.SetBool("Run", false);
         }

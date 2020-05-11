@@ -15,12 +15,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] AmmoManager ammoSlot;
     [SerializeField] TextMeshProUGUI ammoText;
     [SerializeField] AudioClip audioClip;
-    [SerializeField] float timeBetweenShots = .2f;
-
+    [SerializeField] float shotsDelay = .2f;
+    [SerializeField] Canvas pauseMenu, optionsMenu;
 
 
 
     bool isShootEnabled = true;
+    private int burstSize;
 
     private void OnEnable()
     {
@@ -30,9 +31,19 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
 
+        if (!pauseMenu.isActiveAndEnabled && !optionsMenu.isActiveAndEnabled)
+        {
+            HandleShot();
+        }
         ammoText.text = ammoSlot.GetAmmo(ammoType).ToString();
+    }
 
-        ShotHandle();
+    private void HandleShot()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            StartCoroutine(WeaponShoot());
+        }
     }
 
     IEnumerator WeaponShoot()
@@ -43,11 +54,12 @@ public class Weapon : MonoBehaviour
             GetComponent<AudioSource>().PlayOneShot(audioClip);
             WeaponRaycast();
             ammoSlot.ReduceAmmo(ammoType);
-            yield return new WaitForSeconds(timeBetweenShots);
+            yield return new WaitForSeconds(shotsDelay);
             muzzleFlash.Stop();
         }
 
     }
+
 
     private void WeaponRaycast()
     {
@@ -67,38 +79,6 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void ShotHandle()
-    {
-        if (ammoType == AmmoType.pistolAmmo || ammoType == AmmoType.shotgunAmmo)
-        {
-            if (Input.GetButtonDown("Fire1"))
-            {
-                StartCoroutine(WeaponShoot());
-            }
-        }
-        if (ammoType == AmmoType.carbineAmmo)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("Ogień ciągły!!");
-                if (ammoSlot.GetAmmo(ammoType) > 0)
-                {
-                    muzzleFlash.Play();
-                    GetComponent<AudioSource>().Play();
-                    WeaponRaycast();
-                    ammoSlot.ReduceAmmo(ammoType);
 
-                }
-
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                Debug.Log("Koniec ostrzału");
-                GetComponent<AudioSource>().Stop();
-                muzzleFlash.Stop();//todo zrobic ciagły efekt strzelania i dzwiek
-            }
-        }
-
-    }
 
 }
