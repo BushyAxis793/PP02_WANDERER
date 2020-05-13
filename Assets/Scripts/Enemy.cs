@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour
                 {
                     anim.SetTrigger("Dead");
                     anim.enabled = false;
+                    GetComponent<Enemy>().enabled = false;   
                     Destroy(gameObject, 10f);
                 }
 

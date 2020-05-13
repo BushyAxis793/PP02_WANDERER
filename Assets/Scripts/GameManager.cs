@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     bool isActive;
+    bool onCursor;
     [SerializeField] GameObject hudCanvas;
     [SerializeField] GameObject pauseMenuCanvas;
 
@@ -16,8 +18,27 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        ActiveCursor();
         PauseMenu();
     }
+
+    private void ActiveCursor()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            onCursor = !onCursor;
+
+            if (onCursor)
+            {
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.visible = false;
+            }
+        }
+    }
+
     public void ExitGame()
     {
         Application.Quit();
@@ -38,12 +59,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadGameScene()
     {
-        Cursor.visible = false;
         SceneManager.LoadScene(1);
+        Time.timeScale = 1;
     }
     public void LoadMainMenuScene()
     {
-        Cursor.visible = true;
         SceneManager.LoadScene(0);
     }
 
@@ -56,14 +76,12 @@ public class GameManager : MonoBehaviour
             if (isActive)
             {
                 Time.timeScale = 0;
-                Cursor.visible = true;
                 hudCanvas.SetActive(false);
                 pauseMenuCanvas.SetActive(true);
             }
             else
             {
                 Time.timeScale = 1;
-                Cursor.visible = false;
                 hudCanvas.SetActive(true);
                 pauseMenuCanvas.SetActive(false);
             }
@@ -73,7 +91,6 @@ public class GameManager : MonoBehaviour
     public void BackToGameClick()
     {
         Time.timeScale = 1;
-        Cursor.visible = false;
         hudCanvas.SetActive(true);
         pauseMenuCanvas.SetActive(false);
     }

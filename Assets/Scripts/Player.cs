@@ -8,10 +8,10 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     float movementSpeed;
-    float walkSpeed = 5f;
-    float crouchSpeed = 2f;
-    float runSpeed = 10f;
-    float jumpSpeed = 5f;
+    float walkSpeed = 10f;
+    float crouchSpeed = 5f;
+    float runSpeed = 15f;
+    float jumpSpeed = 10f;
     float gravityForce = 20f;
 
     float inputX, inputY;
