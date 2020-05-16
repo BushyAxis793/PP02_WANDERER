@@ -18,6 +18,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] float shotsDelay = .2f;
     [SerializeField] Canvas pauseMenu, optionsMenu;
 
+    Coroutine carbineCoroutine;
+
 
 
     bool isShootEnabled = true;
@@ -40,10 +42,28 @@ public class Weapon : MonoBehaviour
 
     private void HandleShot()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (ammoType == AmmoType.pistolAmmo || ammoType == AmmoType.shotgunAmmo)
         {
-            StartCoroutine(WeaponShoot());
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                StartCoroutine(WeaponShoot());
+            }
         }
+        if (ammoType == AmmoType.carbineAmmo)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                muzzleFlash.Play();
+                carbineCoroutine = StartCoroutine(CarbineShoot());
+            }
+            if (Input.GetButtonUp("Fire1"))
+            {
+                StopCoroutine(carbineCoroutine);
+                muzzleFlash.Stop();
+            }
+        }
+
     }
 
     IEnumerator WeaponShoot()
@@ -51,7 +71,7 @@ public class Weapon : MonoBehaviour
         if (ammoSlot.GetAmmo(ammoType) > 0)
         {
             muzzleFlash.Play();
-            GetComponent<AudioSource>().PlayOneShot(audioClip);
+            AudioSource.PlayClipAtPoint(audioClip, Camera.main.transform.position, 1f);
             WeaponRaycast();
             ammoSlot.ReduceAmmo(ammoType);
             yield return new WaitForSeconds(shotsDelay);
@@ -60,6 +80,21 @@ public class Weapon : MonoBehaviour
 
     }
 
+    IEnumerator CarbineShoot()
+    {
+        while (ammoSlot.GetAmmo(ammoType) > 0)
+        {
+            GetComponent<AudioSource>().PlayOneShot(audioClip);
+            WeaponRaycast();
+            ammoSlot.ReduceAmmo(ammoType);
+            yield return new WaitForSeconds(shotsDelay);
+        }
+        if (ammoSlot.GetAmmo(ammoType) <= 0)
+        {
+            muzzleFlash.Stop();
+        }
+
+    }
 
     private void WeaponRaycast()
     {
