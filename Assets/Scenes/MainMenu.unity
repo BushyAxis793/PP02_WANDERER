@@ -2429,7 +2429,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 792598093}
+      - m_Target: {fileID: 1841530484}
         m_MethodName: MusicHandler
         m_Mode: 0
         m_Arguments:
@@ -3968,7 +3968,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 792598093}
+      - m_Target: {fileID: 1841530484}
         m_MethodName: MusicOnOff
         m_Mode: 1
         m_Arguments:

@@ -24,11 +24,8 @@ public class Enemy : MonoBehaviour
     float targetDistance;
 
     Player player;
-
     NavMeshAgent agent;
-
     Granade granade;
-
     Animator anim;
 
     private void Start()

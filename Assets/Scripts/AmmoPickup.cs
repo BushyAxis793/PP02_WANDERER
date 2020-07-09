@@ -11,10 +11,6 @@ public class AmmoPickup : MonoBehaviour
 
     bool canPickup;
 
-    private void Start()
-    {
-
-    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) & canPickup)

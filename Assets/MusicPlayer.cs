@@ -5,8 +5,6 @@ using UnityEngine;
 public class MusicPlayer : MonoBehaviour
 {
 
-    bool isPlay;
-    float musicVolume = .5f;
     private void Awake()
     {
         int numMusicPlayers = FindObjectsOfType<MusicPlayer>().Length;
@@ -20,27 +18,5 @@ public class MusicPlayer : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        GetComponent<AudioSource>().volume = musicVolume;
-    }
 
-    public void MusicHandler(float vol)
-    {
-        musicVolume = vol;
-    }
-
-    public void MusicOnOff()
-    {
-        isPlay = !isPlay;
-        if (isPlay)
-        {
-
-            GetComponent<AudioSource>().Play();
-        }
-        else
-        {
-            GetComponent<AudioSource>().Stop();
-        }
-    }
 }

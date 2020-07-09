@@ -7,17 +7,29 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    bool isActive;
-    bool onCursor;
     [SerializeField] GameObject hudCanvas;
     [SerializeField] GameObject pauseMenuCanvas;
 
+    MusicPlayer musicPlayer;
+    AudioSource audioSource;
+
+    bool isActive;
+    bool onCursor;
+    bool isPlay;
+    float musicVolume = .5f;
+
+
     void Start()
     {
+        musicPlayer = FindObjectOfType<MusicPlayer>();
+        audioSource = musicPlayer.GetComponent<AudioSource>();
+
         Cursor.visible = true;
     }
     private void Update()
     {
+        audioSource.volume = musicVolume;
+
         ActiveCursor();
         PauseMenu();
     }
@@ -95,5 +107,22 @@ public class GameManager : MonoBehaviour
         pauseMenuCanvas.SetActive(false);
     }
 
+
+    public void MusicHandler(float vol)
+    {
+        musicVolume = vol;
+    }
+
+    public void MusicOnOff()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+        else
+        {
+            audioSource.Play();
+        }
+    }
 
 }

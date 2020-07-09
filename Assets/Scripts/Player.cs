@@ -52,17 +52,20 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        healthText.text = "+" + playerHealth.ToString();
 
         if (isAlive)
         {
+            UpdateHealth();
             PlayerMovement();
             PlayerCrouch();
             PlayerRun();
         }
     }
 
-
+    private string UpdateHealth()
+    {
+        return healthText.text = "+" + playerHealth.ToString();
+    }
 
     private void PlayerJump()
     {
