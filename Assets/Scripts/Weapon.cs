@@ -20,10 +20,15 @@ public class Weapon : MonoBehaviour
 
     Coroutine carbineCoroutine;
 
-
+    Animator shotAnim;
 
     bool isShootEnabled = true;
     private int burstSize;
+
+    private void Start()
+    {
+       // shotAnim = GetComponentInChildren<Animator>();
+    }
 
     private void OnEnable()
     {
@@ -47,7 +52,10 @@ public class Weapon : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
+
+               // shotAnim.SetBool("isShooting", true);
                 StartCoroutine(WeaponShoot());
+          //      shotAnim.SetBool("isShooting", false);
             }
         }
         if (ammoType == AmmoType.carbineAmmo)
