@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 5124406679762382501}
   - component: {fileID: 3222254937030717597}
   - component: {fileID: 8908272265299453548}
+  - component: {fileID: 6655145421026945437}
   m_Layer: 0
   m_Name: M4_Carbine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5124406679760612421
 Transform:
   m_ObjectHideFlags: 0
@@ -103,6 +104,8 @@ MonoBehaviour:
   ammoText: {fileID: 0}
   audioClip: {fileID: 8300000, guid: 2a5bea528820a694b978bab9db1321b1, type: 3}
   shotsDelay: 0.2
+  pauseMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
 --- !u!82 &8908272265299453548
 AudioSource:
   m_ObjectHideFlags: 0
@@ -199,6 +202,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!111 &6655145421026945437
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124406679760449637}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: fd05315a1ec0efb4a85b0483665ae2bd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: fd05315a1ec0efb4a85b0483665ae2bd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &4472583273532534612
 PrefabInstance:
   m_ObjectHideFlags: 0

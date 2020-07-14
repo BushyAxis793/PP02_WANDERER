@@ -27,7 +27,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-       // shotAnim = GetComponentInChildren<Animator>();
+        shotAnim = GetComponentInChildren<Animator>();
     }
 
     private void OnEnable()
@@ -52,27 +52,30 @@ public class Weapon : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-
-               // shotAnim.SetBool("isShooting", true);
+                shotAnim.SetTrigger("isShooting");
                 StartCoroutine(WeaponShoot());
-          //      shotAnim.SetBool("isShooting", false);
             }
         }
+
         if (ammoType == AmmoType.carbineAmmo)
         {
             if (Input.GetButtonDown("Fire1"))
             {
                 muzzleFlash.Play();
+                GetComponent<Animation>().Play("Carbine Recoil");
                 carbineCoroutine = StartCoroutine(CarbineShoot());
             }
             if (Input.GetButtonUp("Fire1"))
             {
-                StopCoroutine(carbineCoroutine);
                 muzzleFlash.Stop();
+                GetComponent<Animation>().Stop("Carbine Recoil");
+                StopCoroutine(carbineCoroutine);
             }
         }
 
     }
+
+
 
     IEnumerator WeaponShoot()
     {

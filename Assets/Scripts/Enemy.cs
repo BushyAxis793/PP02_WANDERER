@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
 
     [Header("Enemy Patrol")]
     [SerializeField] Transform[] patrolSpots;
-    float speed;
     int randomSpot;
     float targetDistance;
 
@@ -27,6 +26,7 @@ public class Enemy : MonoBehaviour
     NavMeshAgent agent;
     Granade granade;
     Animator anim;
+
 
     private void Start()
     {
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
                 {
                     anim.SetTrigger("Dead");
                     anim.enabled = false;
-                    GetComponent<Enemy>().enabled = false;   
+                    GetComponent<Enemy>().enabled = false;
                     Destroy(gameObject, 10f);
                 }
 

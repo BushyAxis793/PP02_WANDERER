@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 8763525155500904704}
   - component: {fileID: 6273845382491269325}
   - component: {fileID: 7444065899110192292}
+  - component: {fileID: 3538439863926770433}
   m_Layer: 0
   m_Name: 870_Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8763525155502805984
 Transform:
   m_ObjectHideFlags: 0
@@ -199,6 +200,27 @@ MonoBehaviour:
   ammoText: {fileID: 0}
   audioClip: {fileID: 8300000, guid: 8ed03b7a13165a7498f0a319ff835ab6, type: 3}
   shotsDelay: 0.2
+  pauseMenu: {fileID: 0}
+  optionsMenu: {fileID: 0}
+--- !u!95 &3538439863926770433
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763525155503099840}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da2b625cd5c5c2547a2b4c9ebc2c2dd4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4102854520606503911
 PrefabInstance:
   m_ObjectHideFlags: 0
