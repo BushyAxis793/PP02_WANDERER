@@ -22,18 +22,13 @@ public class Weapon : MonoBehaviour
 
     Animator shotAnim;
 
-    bool isShootEnabled = true;
-    private int burstSize;
+    const string FIRE_ANIMATION_TRIGGER = "isShooting";
 
     private void Start()
     {
         shotAnim = GetComponentInChildren<Animator>();
     }
 
-    private void OnEnable()
-    {
-        isShootEnabled = true;
-    }
 
     private void Update()
     {
@@ -52,7 +47,7 @@ public class Weapon : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-                shotAnim.SetTrigger("isShooting");
+
                 StartCoroutine(WeaponShoot());
             }
         }
@@ -62,13 +57,13 @@ public class Weapon : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 muzzleFlash.Play();
-                GetComponent<Animation>().Play("Carbine Recoil");
+
                 carbineCoroutine = StartCoroutine(CarbineShoot());
             }
             if (Input.GetButtonUp("Fire1"))
             {
                 muzzleFlash.Stop();
-                GetComponent<Animation>().Stop("Carbine Recoil");
+
                 StopCoroutine(carbineCoroutine);
             }
         }
@@ -81,6 +76,7 @@ public class Weapon : MonoBehaviour
     {
         if (ammoSlot.GetAmmo(ammoType) > 0)
         {
+            shotAnim.SetTrigger(FIRE_ANIMATION_TRIGGER);
             muzzleFlash.Play();
             AudioSource.PlayClipAtPoint(audioClip, Camera.main.transform.position, 1f);
             WeaponRaycast();
@@ -98,11 +94,13 @@ public class Weapon : MonoBehaviour
             GetComponent<AudioSource>().PlayOneShot(audioClip);
             WeaponRaycast();
             ammoSlot.ReduceAmmo(ammoType);
+            shotAnim.SetTrigger(FIRE_ANIMATION_TRIGGER);
             yield return new WaitForSeconds(shotsDelay);
         }
         if (ammoSlot.GetAmmo(ammoType) <= 0)
         {
             muzzleFlash.Stop();
+
         }
 
     }

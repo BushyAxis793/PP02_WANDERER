@@ -78,8 +78,9 @@ public class Enemy : MonoBehaviour
             health -= damage;
             if (health <= 0)
             {
-                anim.SetTrigger("Dead");
                 isAlive = false;
+                agent.Stop();
+                anim.SetTrigger("Dead");
                 Destroy(gameObject, 10f);
             }
         }

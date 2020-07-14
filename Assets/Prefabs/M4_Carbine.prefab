@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5124406679762382501}
   - component: {fileID: 3222254937030717597}
   - component: {fileID: 8908272265299453548}
-  - component: {fileID: 6655145421026945437}
+  - component: {fileID: 5544204597326195018}
   m_Layer: 0
   m_Name: M4_Carbine
   m_TagString: Untagged
@@ -202,22 +202,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!111 &6655145421026945437
-Animation:
+--- !u!95 &5544204597326195018
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5124406679760449637}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: fd05315a1ec0efb4a85b0483665ae2bd, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: fd05315a1ec0efb4a85b0483665ae2bd, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 750e95547c137694593d6eb4396e0b72, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4472583273532534612
 PrefabInstance:
   m_ObjectHideFlags: 0
