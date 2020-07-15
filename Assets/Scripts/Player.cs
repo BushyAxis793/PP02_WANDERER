@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
     float movementSpeed;
     float walkSpeed = 10f;
     float crouchSpeed = 5f;
     float runSpeed = 15f;
-    float jumpSpeed = 10f;
+    float jumpSpeed = 5f;
     float gravityForce = 20f;
 
     float inputX, inputY;
@@ -176,8 +177,7 @@ public class Player : MonoBehaviour
 
         if (isGrounded)
         {
-            movingDirection = new Vector3(inputX, -antiBumpFactor,
-                inputY);
+            movingDirection = new Vector3(inputX, -antiBumpFactor, inputY);
             movingDirection = transform.TransformDirection(movingDirection) * movementSpeed;
 
             PlayerJump();

@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     int randomSpot;
     float targetDistance;
 
+    [SerializeField] float speed;
+
     Player player;
     NavMeshAgent agent;
     Granade granade;
@@ -38,6 +40,7 @@ public class Enemy : MonoBehaviour
         granade = FindObjectOfType<Granade>();
         agent = GetComponent<NavMeshAgent>();
         player = FindObjectOfType<Player>();
+
     }
 
     private void Update()
